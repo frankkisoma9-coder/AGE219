@@ -13,8 +13,9 @@ df = df.dropna(subset=['Year', 'Value'])
 print("rows left after cleaning:", len(df))
 # --- 1. TREND ANALYSIS & SCIPY STATISTICAL ANALYSIS ---
 yearly_data = df.groupby('Year')['Value'].sum().reset_index()
-X = yearly_data['Year']
-Y = yearly_data['Value']
+X = yearly_data['Year'].astype(float).values
+print("---ACTUAL PLOTTING DATA--- \n", yearly_data)
+Y = yearly_data['Value'].astype(float).values
 
 # SciPy Linear Regression for the statistical requirement
 slope, intercept, r_value, p_value, std_err = stats.linregress(X, Y)
