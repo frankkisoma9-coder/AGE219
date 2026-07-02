@@ -4,9 +4,7 @@ import matplotlib.pyplot as plt
 from scipy import stats
 
 # 1. LOAD THE DATA
-# We load the CSV and name the columns based on the data structure visible in your file
-column_names = ['Domain_Code', 'Domain', 'Element_Code', 'Element', 'Country_Code', 'Country', 'Value', 'Item', 'Year', 'Unit']
-df = pd.read_csv('merged_FAOSTAT.csv', names=column_names, header=None, on_bad_lines="skip")
+df = pd.read_csv('merged_FAOSTAT.csv', on_bad_lines="skip")
 
 # Clean up data: ensure Year and Value are numeric types
 df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
