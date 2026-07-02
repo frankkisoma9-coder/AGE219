@@ -5,12 +5,12 @@ from scipy import stats
 
 # 1. LOAD THE DATA
 df = pd.read_csv('merged_FAOSTAT.csv', on_bad_lines="skip")
-
+print("Total rows loaded:", len(df))
 # Clean up data: ensure Year and Value are numeric types
 df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
 df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
 df = df.dropna(subset=['Year', 'Value'])
-
+print("rows left after cleaning:", len(df))
 # --- 1. TREND ANALYSIS & SCIPY STATISTICAL ANALYSIS ---
 yearly_data = df.groupby('Year')['Value'].sum().reset_index()
 X = yearly_data['Year']
