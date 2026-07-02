@@ -87,13 +87,23 @@ for i in range(len(alpha_labels)):
         text = ax.text(j, i, f"{correlation_matrix.iloc[i, j]:.2f}",
                        ha="center", va="center", color="black" if abs(correlation_matrix.iloc[i, j]) < 0.7 else "white")
 
-ax.set_xticks(range(len(alpha_labels)))
-ax.set_yticks(range(len(alpha_labels)))
-ax.set_xticklabels(alpha_labels)
-ax.set_yticklabels(alpha_labels)
-plt.title('Production Metrics Correlation Matrix', pad=20)
-plt.tight_layout()
-plt.savefig('correlation_plot.png', dpi=300)
-plt.close()
+# --- 3. SCATTER PLOT WITH A TREND LINE ---
+plt.figure(figsize=(8, 6))
 
-print("All real analysis plots generated successfully offline!")
+# Plot the actual data points
+plt.scatter(X, Y, color='blue', alpha=0.5, label='Data Points')
+
+# Calculate and plot the trend line using the regression results
+trend_line = slope * X + intercept
+plt.plot(X, trend_line, color='red', linewidth=2, label=f'Trend Line (R={r_value:.2f})')
+
+plt.title('Production Metrics: Scatter Plot with Trend Line')
+plt.xlabel('Year')
+plt.ylabel('Value')
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.tight_layout()
+
+# Save it using a clean name or overwrite the old one
+plt.savefig('correlation_plot.png')
+plt.close()
